@@ -1,0 +1,35 @@
+$list-background: #ffffff;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$list-title-color: #0079bf;
+$card-background: #e4f0f6;
+$text-color: #333;
+
+.list {
+  background-color: $list-background;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px $shadow-color;
+
+  .list-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: $list-title-color;
+    margin-bottom: 10px;
+  }
+
+  .cards-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .card-item {
+      background-color: $card-background;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      color: $text-color;
+    }
+  }
+}
