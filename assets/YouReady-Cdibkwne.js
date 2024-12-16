@@ -1,1 +1,0 @@
-import{a as t,j as a}from"./index-DlWShw7S.js";const n=()=>{const o=t(),e=()=>{o("/board")};return a.jsx("div",{className:"you-ready-container",children:a.jsx("button",{className:"you-ready-button",onClick:e,"aria-label":"Go to board",children:"YOU READY?"})})};export{n as default};
