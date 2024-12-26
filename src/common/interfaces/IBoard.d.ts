@@ -4,6 +4,9 @@ export interface IBoard {
     cards: ICard[],
     id: number,
     title: string,
-    background: string,
+    custom?: {
+        color?: string;
+        description?: string;
+    };
     onBoardUpdated: () => void
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import instance from "../../../../api/request.ts";
 import { toast } from 'react-toastify';
-import {validTitleRegex} from "../../../../common/utils/validation.ts";
+import { validTitleRegex } from "../../../../common/utils/validation.ts";
 import 'react-toastify/dist/ReactToastify.css';
 import './createBoard.scss';
 
@@ -11,6 +11,7 @@ interface CreateBoardProps {
 
 const CreateBoard: React.FC<CreateBoardProps> = ({ onBoardCreated }) => {
     const [newBoardTitle, setNewBoardTitle] = useState('');
+    const [newBoardColor, setNewBoardColor] = useState('#ffffff');
 
     const handleAddBoard = async () => {
         if (newBoardTitle.trim() === '') {
@@ -24,14 +25,26 @@ const CreateBoard: React.FC<CreateBoardProps> = ({ onBoardCreated }) => {
         }
 
         try {
-            await instance.post('board', { title: newBoardTitle });
+            const response = await instance.post('board', {
+                title: newBoardTitle,
+                custom: {
+                    color: newBoardColor
+                }
+            });
+            console.log('Відповідь сервера:', response);
             setNewBoardTitle('');
+            setNewBoardColor('#ffffff');
             toast.success('Дошку успішно створено.');
             onBoardCreated();
-        } catch {
-            toast.error('Не вдалося створити дошку. Спробуйте ще раз.');
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(`Не вдалося створити дошку. Помилка: ${error.message}`);
+            } else {
+                toast.error('Не вдалося створити дошку. Спробуйте ще раз.');
+            }
         }
     };
+
 
     return (
         <div className="modal">
@@ -42,6 +55,12 @@ const CreateBoard: React.FC<CreateBoardProps> = ({ onBoardCreated }) => {
                     value={newBoardTitle}
                     onChange={(e) => setNewBoardTitle(e.target.value)}
                     placeholder="Назва дошки"
+                />
+                <input
+                    type="color"
+                    value={newBoardColor}
+                    onChange={(e) => setNewBoardColor(e.target.value)}
+                    title="Виберіть колір для дошки"
                 />
                 <button onClick={handleAddBoard}>Додати</button>
                 <button onClick={() => onBoardCreated()}>Закрити</button>

@@ -3,7 +3,7 @@ import {ICard} from "./ICard";
 export interface IList {
     lists: [];
     result: string;
-    background: string;
+    color: string;
     boards: [];
     id: number;
     title: string;
